@@ -13,6 +13,7 @@ function onSignIn(googleUser) {
     })
         .done(userCredentials=> {
             console.log(userCredentials)
+            $('#loginModal').modal('hide')
             $('#sign-in').hide()
         })
         .fail(err=> {
