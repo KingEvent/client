@@ -26,9 +26,8 @@
             <a href="#" id="logout" style="display: none;" onclick="signOut();">Sign out</a>
         </div>
     </nav>
-    <h1>Hello world!</h1>
        <!-- register and login -->
-       <div id="for_form">
+    <div id="for_form">
         <form method="POST" id="register_form">
             <h3>Sing up here</h3>
             <label>
@@ -78,15 +77,8 @@
     </div>
     <!-- register and login -->
 
-
-    <button id="auth-button">add to calendar</button>
+    <button id="auth-button" style="color: black;">add to calendar</button>
     <!-- <a href="#" onclick="signOut();">Sign out</a> -->
-    <!-- Footer -->
-    <footer class="page-footer font-small blue">
-        <div class="footer-copyright text-center py-3">© Copyright:
-            <a href="https://github.com/KingEvent">King Event</a>
-        </div>
-    </footer>
 
     <!-- <div class="g-signin2" data-onsuccess="onSignIn" id="sign-in"></div> -->
     <a href="#" onclick="signOut();">Sign out</a>
@@ -119,8 +111,20 @@
                 </div>
             </div>
         </div>
+    </div>
+    
+    <!-- SEARCH -->
+    <form class="form-inline md-form mr-auto mb-4" id="search-form">
+        <input class="form-control mr-sm-2" id="search-bar" type="text" placeholder="Search events here" aria-label="Search">
+        <button class="btn aqua-gradient btn-rounded btn-sm my-0" id="search-btn" type="submit">Go</button>
+    </form>
 
-     
+    <!-- SLIDER -->
+    <div class="range-slider">
+        <input class="range-slider__range" type="range" value="10" min="0" max="100">
+        <span class="range-slider__value">0</span>
+    </div>
+
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
             crossorigin="anonymous"></script>
@@ -165,27 +169,52 @@
       <li><button class="cat-red" data-cat="cat-green" id="community">Community</button></li>
     </ul>
   </div>
-
-<!-- CONTENT -->
-  <div class="container mt-2">
-    <div class="row">
+  
+    <!-- CONTENT -->
+    <div class="container mt-2">
+        <div class="row">
+        </div>
     </div>
-  </div>
 
-<!-- MODAL -->
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      </div>
+    <!-- MODAL -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+        </div>
     </div>
-  </div>
+
+
+    <footer class="page-footer font-small blue">
+        <div class="footer-copyright text-center py-3">© Copyright:
+            <a href="https://github.com/KingEvent">King Event</a>
+        </div>
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js"
+        integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script type="text/javascript"
+        src="https://static-cdn.kloudless.com/p/platform/sdk/kloudless.authenticator.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="./scripts/main.js"></script>
         
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="./scripts/main.js"></script>
+    <script src="./scripts/main.js"></script> -->
 </body>
 
 </html>
