@@ -145,7 +145,7 @@ function signOut() {
         console.log('User signed out.');
         $('#logout').hide()
         $('#sign-in').show()
-        localStorage.removeItem('accessToken')
+        localStorage.removeItem('token')
     });
 }
 
