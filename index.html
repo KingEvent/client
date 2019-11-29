@@ -16,75 +16,85 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="http://localhost:8080">King Even</a>
+        <a class="navbar-brand" href="http://localhost:8080">King Event</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <form class="form-inline md-form mr-auto m-0 p-0" id="search-form" style="width: auto;">
+            <input class="form-control mr-sm-2" id="search-bar" type="text" placeholder="Search events here" aria-label="Search">
+            <button class="btn aqua-gradient btn-rounded btn-sm my-0" id="search-btn" type="submit">Go</button>
+        </form>
+        
+        
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav ml-auto">
+                <button id="auth-button" class="btn btn-primary">connect your calendar</button>            
             </ul>
-            <a href="#" id="logout" style="display: none;" onclick="signOut();">Sign out</a>
+            <a href="#" id="logout" onclick="signOut();">Sign out</a>
         </div>
     </nav>
        <!-- register and login -->
-    <div id="for_form">
-        <form method="POST" id="register_form">
-            <h3>Sing up here</h3>
-            <label>
-                <p class="label-txt">ENTER YOUR EMAIL</p>
-                <input type="email" class="input" id="register_email">
-                <div class="line-box">
-                    <div class="line"></div>
-                </div>
-            </label>
-            <label>
-                <p class="label-txt">ENTER YOUR USERNAME</p>
-                <input type="text" class="input" id="register_username">
-                <div class="line-box">
-                    <div class="line"></div>
-                </div>
-            </label>
-            <label>
-                <p class="label-txt">ENTER YOUR PASSWORD</p>
-                <input type="password" class="input" id="register_password">
-                <div class="line-box">
-                    <div class="line"></div>
-                </div>
-            </label>
-            <input type="submit" value="Sign up">
-        </form>
-
-        <form method="POST" id="login_form">
-            <h3>Sign in here</h3>
-            <label>
-                <p class="label-txt">ENTER YOUR USERNAME</p>
-                <input type="text" class="input" id="login_username">
-                <div class="line-box">
-                    <div class="line"></div>
-                </div>
-            </label>
-            <label>
-                <p class="label-txt">ENTER YOUR PASSWORD</p>
-                <input type="password" class="input" id="login_password">
-                <div class="line-box">
-                    <div class="line"></div>
-                </div>
-            </label>
-            <input type="submit" value="Sign in" onclick="getLogin()">
-            <div class="g-signin2" data-onsuccess="onSignIn" id="sign-in" class="btntbnlogin"></div>
-        </form>
-
-    </div>
+    <section id="logged-out">
+        <div id="for_form">
+                <form method="POST" id="register_form">
+                    <h3>Sign up here</h3>
+                    <label>
+                        <p class="label-txt">ENTER YOUR EMAIL</p>
+                        <input type="email" class="input" id="register_email">
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                    </label>
+                    <label>
+                        <p class="label-txt">ENTER YOUR USERNAME</p>
+                        <input type="text" class="input" id="register_username">
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                    </label>
+                    <label>
+                        <p class="label-txt">ENTER YOUR PASSWORD</p>
+                        <input type="password" class="input" id="register_password">
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                    </label>
+                    <input type="submit" value="Sign up">
+                </form>
+        
+                <form method="POST" id="login_form">
+                    <h3>Sign in here</h3>
+                    <label>
+                        <p class="label-txt">ENTER YOUR USERNAME</p>
+                        <input type="text" class="input" id="login_username">
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                    </label>
+                    <label>
+                        <p class="label-txt">ENTER YOUR PASSWORD</p>
+                        <input type="password" class="input" id="login_password">
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                    </label>
+                    <input type="submit" value="Sign in" onclick="getLogin()">
+                    <div class="g-signin2" data-onsuccess="onSignIn" id="sign-in" class="btntbnlogin"></div>
+                </form>
+        
+        </div>
+    </section>
+    
     <!-- register and login -->
 
-    <button id="auth-button" style="color: black;">add to calendar</button>
+    <!-- <button id="auth-button" style="color: black;">add to calendar</button> -->
     <!-- <a href="#" onclick="signOut();">Sign out</a> -->
 
     <!-- <div class="g-signin2" data-onsuccess="onSignIn" id="sign-in"></div> -->
-    <a href="#" onclick="signOut();">Sign out</a>
+    <!-- <a href="#" onclick="signOut();">Sign out</a> -->
 
     <!-- loginModal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -111,48 +121,51 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     
     <!-- SEARCH -->
-    <form class="form-inline md-form mr-auto mb-4" id="search-form">
-        <input class="form-control mr-sm-2" id="search-bar" type="text" placeholder="Search events here" aria-label="Search">
-        <button class="btn aqua-gradient btn-rounded btn-sm my-0" id="search-btn" type="submit">Go</button>
-    </form>
+
 
     <!-- SLIDER -->
-    <div class="range-slider">
+    <!-- <div class="range-slider">
         <input class="range-slider__range" type="range" value="10" min="0" max="100">
         <span class="range-slider__value">0</span>
-    </div>
+    </div> -->
 
-    <!-- FILTER -->
-    <div class="container filtering">
-        <ul class="nav nav-pills nav-filter-cat">
-        <li><button class="cat-all active" id="all">All Categories</button></li>
-        <li><button class="cat-red" data-cat="cat-red" id="conferences">Conferences</button></li>
-        <li><button class="cat-red" data-cat="cat-blue" id="expos">Expos</button></li>
-        <li><button class="cat-red" data-cat="cat-green" id="concerts">Concerts</button></li>
-        <li><button class="cat-red" data-cat="cat-green" id="performing-arts">Performing Arts</button></li>
-        <li><button class="cat-red" data-cat="cat-green" id="sports">Sports</button></li>
-        <li><button class="cat-red" data-cat="cat-green" id="festival">Festival</button></li>
-        <li><button class="cat-red" data-cat="cat-green" id="community">Community</button></li>
-        </ul>
-    </div>
+    <section id="logged-in">
+        <!-- <button id="auth-button" class="btn btn-primary">connect your calendar</button> -->
+        <!-- <form class="form-inline md-form mr-auto mb-4" id="search-form">
+            <input class="form-control mr-sm-2" id="search-bar" type="text" placeholder="Search events here" aria-label="Search">
+            <button class="btn aqua-gradient btn-rounded btn-sm my-0" id="search-btn" type="submit">Go</button>
+        </form> -->
 
-    <!-- CONTENT -->
-    <div class="container mt-2">
-        <div class="row">
+        <div class="container filtering">
+            <ul class="nav nav-pills nav-filter-cat">
+                <li><button class="cat-all active" id="all">All Categories</button></li>
+                <li><button class="cat-red" data-cat="cat-red" id="conferences">Conferences</button></li>
+                <li><button class="cat-red" data-cat="cat-blue" id="expos">Expos</button></li>
+                <li><button class="cat-red" data-cat="cat-green" id="concerts">Concerts</button></li>
+                <li><button class="cat-red" data-cat="cat-green" id="performing-arts">Performing Arts</button></li>
+                <li><button class="cat-red" data-cat="cat-green" id="sports">Sports</button></li>
+                <li><button class="cat-red" data-cat="cat-green" id="festival">Festival</button></li>
+                <li><button class="cat-red" data-cat="cat-green" id="community">Community</button></li>
+            </ul>
         </div>
-    </div>
-
-    <!-- MODAL -->
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
-        <div class="modal-content">
+    
+        <!-- CONTENT -->
+        <div class="container mt-2">
+            <div class="row">
+            </div>
         </div>
+    
+        <!-- MODAL -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+            </div>
         </div>
-    </div>
-
+    </section>
 
     <footer class="page-footer font-small blue">
         <div class="footer-copyright text-center py-3">© Copyright:

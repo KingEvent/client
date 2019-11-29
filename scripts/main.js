@@ -1,9 +1,29 @@
 const BASE_URL = "http://localhost:3000";
+let newEvent;
 
 $(document).ready(function () {
     console.log('ready')
-    getUserIP()
     e = $('#auth-button');
+    getUserIP()
+    showAll()
+    $('#search-form').hide()
+    $('#logout').hide()
+    e.hide()
+
+    if (localStorage.getItem('token')) {
+        $('#logged-in').show()
+        $('#logged-out').hide()
+    } else {
+        $('#logged-out').show()
+        $('#logged-in').hide()
+    }
+
+    if(localStorage.getItem('token')) {
+        e.show()
+        $('#logout').show()
+    } else {
+        e.hide()
+    }
 
     let options = {
         'client_id': '9acLp9_J7iFllX9GG3wy9lAgQNAxcYpRUxAikABoAiiFUiHm',
@@ -14,12 +34,13 @@ $(document).ready(function () {
         if (result.error) {
             console.error('An error occurred:', result.error);
         } else {
-            sendUserToken(result.access_token);
+            localStorage.setItem('calendar', result.access_token)
+            e.hide()
+            // sendUserToken(result.access_token);
+            // sendUserToken({token: result.access_token, newEvent});
         }
     });
 
-    //register and login
-    // getRegister()
     $('#register_form').submit(function (e) {
 
         e.preventDefault();
@@ -43,7 +64,6 @@ $(document).ready(function () {
             })
     });
 
-    // getLogin()
     $('#login_form').submit(function (e) {
 
         e.preventDefault();
@@ -60,6 +80,10 @@ $(document).ready(function () {
                 // console.log(data);
                 localStorage.setItem('token', data.token)
                 $(`#for_form`).hide()
+                $('#logged-in').show()
+                $('#logged-out').hide()
+                $('#auth-button').show()
+                $('#logout').show()
             },
             error: function (data) {
                 console.log('An error occurred.');
@@ -74,7 +98,7 @@ $(document).ready(function () {
       e.preventDefault();
       let value = $('#search-bar').val();
       $.ajax({
-        url:`http://localhost:5000/events/search/${value}`,
+        url:`http://localhost:3000/events/search/${value}`,
         type:"get"
       })
       .done(data => {
@@ -86,12 +110,12 @@ $(document).ready(function () {
       //   alert('gabisa')
       // }) 
     })
-    showAll()
+    
 });
 
 function showAll() {
   $.ajax({
-    url:"http://localhost:5000/events",
+    url:`http://localhost:3000/events?lon=${localStorage.getItem('lon')}&lat=${localStorage.getItem('lat')}`,
     type:"get"
   })
   .done(data => {
@@ -113,12 +137,17 @@ function onSignIn(googleUser) {
             id_token: id_token
         }
     })
-        .done(userCredentials=> {
-            localStorage.setItem('token', userCredentials)
-            console.log(userCredentials)
-            $('#loginModal').modal('hide')
-            $('#sign-in').hide()
-        });
+    .done(userCredentials=> {
+        localStorage.setItem('token', userCredentials)
+
+        $('#logged-in').show()
+        $('#logged-out').hide()
+        
+        $('#sign-in').hide()
+        $('#auth-button').show();
+        $('#search-form').show()
+        $('#logout').show()
+    });
 }
 
 // get user ip using ip-api.com and saved to localStorage
@@ -145,27 +174,44 @@ function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
         console.log('User signed out.');
-        $('#logout').hide()
+        
         $('#sign-in').show()
-        localStorage.removeItem('accessToken')
-    });
+        localStorage.removeItem('token')
+        localStorage.removeItem('calendar')
+        $('#auth-button').hide()
+        $('#search-form').hide()
+        $('#logout').hide()
+        $('#logged-out').show()
+        $('#logged-in').hide()
+    });  
 }
 
 function loginFunction(e) {
     const data = $('input').serialize()
 }
 
-function sendUserToken(token) {
+function addToCalendar() {
+    let token = localStorage.getItem('calendar');
+    let event = newEvent
     $.ajax({
         type: 'POST',
         url: `${BASE_URL}/calendar`,
-        data: { token },
+        data: { 
+            token,
+            venue: event.venue,
+            start: event.start,
+            end: event.end
+        },
         headers: {
             authorization: localStorage.getItem('jwt_token')
         }
     })   
     .done(data => {
-        console.log(data)
+        Swal.fire(
+            'Added to Calendar!',
+            'You can check your google calendar!',
+            'success'
+        )
     }) 
     .fail(err => {
         console.log(err)
@@ -174,7 +220,7 @@ function sendUserToken(token) {
 
 function showOne(id) {
   $.ajax({
-    url:`http://localhost:5000/events/${id}`,
+    url:`http://localhost:3000/events/${id}`,
     type:"get"
   })
   .done(result => {
@@ -183,6 +229,13 @@ function showOne(id) {
     let venue = (data.entities[0].name) ? data.entities[0].name : "No venue info";
     let address = (data.entities[0].formatted_address) ? data.entities[0].formatted_address : "No address info";
     let description = (data.description) ? data.description : "No description";
+
+    newEvent = {
+        venue,
+        start: data.start,
+        end: data.end 
+    }
+    console.log(newEvent)
     $('.modal-content').append(` 
     <div class="modal-header">
       <h1 class="modal-title">${data.title}</h1>
@@ -195,7 +248,8 @@ function showOne(id) {
       <p>${description}</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addToCalendar()">Add to Calendar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
     </div>
     `)
   })
@@ -203,24 +257,28 @@ function showOne(id) {
 
 function viewAll(result) {
   $('.row').empty()
+  console.log(result)
   result.forEach(data => {
-    let venue = (data.entities[0].name) ? data.entities[0].name : "No venue info";
-    let address = (data.entities[0].formatted_address) ? data.entities[0].formatted_address : "No address info";
-    $('.row').append(`
-  <div class="col-md-4 col-sm-6 post" id="${data.category}">
-    <div class="card card-block">
-      <h4 class="card-title text-right"><i class="material-icons">${data.category}</i></h4>
-      <h4 class="card-title text-right">
-        <button type="button" onclick="showOne('${data.id}')" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-          Details
-        </button>
-      </h4>
-      <h3 class="card-title mt-3 mb-3"><b>${data.title}</b></h3>
-      <h4 class="card-text">${new Date(data.start).toDateString()}</h4> 
-      <h5 class="card-title mt-3 mb-3">${venue}</h5>
-      <h5 class="card-title mt-3 mb-3">${address}</h5>
-    </div>
-  </div>`)
+      if (data.entities.length !== 0) {
+        let venue = (data.entities[0].name) ? data.entities[0].name : "No venue info";
+        let address = (data.entities[0].formatted_address) ? data.entities[0].formatted_address : "No address info";
+        $('.row').append(`
+        <div class="col-md-4 col-sm-6 post" id="${data.category}">
+            <div class="card card-block p-4">
+            <h4 class="card-title text-right"><i class="material-icons">${data.category}</i></h4>
+           
+            <h3 class="card-title mt-3 mb-3"><b>${data.title}</b></h3>
+            <h4 class="card-text">${new Date(data.start).toDateString()}</h4> 
+            <h5 class="card-title mt-3 mb-3">${venue}</h5>
+            <h5 class="card-title mt-3 mb-3">${address}</h5>
+            <h4 class="card-title text-right">
+            <button type="button" onclick="showOne('${data.id}')" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Details
+            </button>
+            </h4>
+            </div>
+        </div>`)
+      }
   })
 }
 
