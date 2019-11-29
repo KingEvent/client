@@ -97,6 +97,7 @@ function showAll() {
     type:"get"
   })
   .done(data => {
+    console.log('asdasdas', data)
     viewAll(data);
   })
 }
@@ -204,9 +205,9 @@ function showOne(id) {
   .done(result => {
     $('.modal-content').empty()
     const data = result[0]
-    let venue = (data.entities[0].name) ? data.entities[0].name : "No venue info";
-    let address = (data.entities[0].formatted_address) ? data.entities[0].formatted_address : "No address info";
-    let description = (data.description) ? data.description : "No description";
+    let venue = (!data.entities[0].name) ? "No venue info" : data.entities[0].name;
+    let address = (!data.entities[0].formatted_address) ? "No address info" : data.entities[0].formatted_address;
+    let description = (!data.description) ? "No description" : data.description;
     $('.modal-content').append(` 
     <div class="modal-header">
       <h1 class="modal-title">${data.title}</h1>
@@ -226,26 +227,34 @@ function showOne(id) {
 }
 
 function viewAll(result) {
+  console.log(result)
   $('.row').empty()
   result.forEach(data => {
-    let venue = (data.entities[0].name) ? data.entities[0].name : "No venue info";
-    let address = (data.entities[0].formatted_address) ? data.entities[0].formatted_address : "No address info";
-    $('.row').append(`
-  <div class="col-md-4 col-sm-6 post" id="${data.category}">
-    <div class="card card-block">
-      <h4 class="card-title text-right"><i class="material-icons">${data.category}</i></h4>
-      <h4 class="card-title text-right">
-        <button type="button" onclick="showOne('${data.id}')" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-          Details
-        </button>
-      </h4>
-      <h3 class="card-title mt-3 mb-3"><b>${data.title}</b></h3>
-      <h4 class="card-text">${new Date(data.start).toDateString()}</h4> 
-      <h5 class="card-title mt-3 mb-3">${venue}</h5>
-      <h5 class="card-title mt-3 mb-3">${address}</h5>
-    </div>
-  </div>`)
+    // console.log(data)
+    if (data.entities.length !== 0) {
+      let venue = (data.entities[0].name) ? data.entities[0].name : "No venue info";
+      let address = (data.entities[0].formatted_address) ? data.entities[0].formatted_address : "No address info";
+      $('.all-content').append(`
+    <div class="col-md-4 col-sm-6 post" id="${data.category}">
+      <div class="card card-block">
+        <h4 class="card-title text-right"><i class="material-icons">${data.category}</i></h4>
+        <h4 class="card-title text-right">
+          <button type="button" onclick="showOne('${data.id}')" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Details
+          </button>
+        </h4>
+        <h3 class="card-title mt-3 mb-3"><b>${data.title}</b></h3>
+        <h4 class="card-text">${new Date(data.start).toDateString()}</h4> 
+        <h5 class="card-title mt-3 mb-3">${venue}</h5>
+        <h5 class="card-title mt-3 mb-3">${address}</h5>
+      </div>
+    </div>`)  
+    }
   })
+
+  for (let i = 0; i < result.length; i++) {
+    console.log('iniii',result[i])
+  }
 }
 
 $('.post').show();
