@@ -139,6 +139,53 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="./scripts/main.js"></script>
 
+
+<!-- SEARCH -->
+  <form class="form-inline md-form mr-auto mb-4" id="search-form">
+    <input class="form-control mr-sm-2" id="search-bar" type="text" placeholder="Search events here" aria-label="Search">
+    <button class="btn aqua-gradient btn-rounded btn-sm my-0" id="search-btn" type="submit">Go</button>
+  </form>
+
+<!-- SLIDER -->
+  <div class="range-slider">
+    <input class="range-slider__range" type="range" value="10" min="0" max="100">
+    <span class="range-slider__value">0</span>
+  </div>
+
+<!-- FILTER -->
+  <div class="container filtering">
+    <ul class="nav nav-pills nav-filter-cat">
+      <li><button class="cat-all active" id="all">All Categories</button></li>
+      <li><button class="cat-red" data-cat="cat-red" id="conferences">Conferences</button></li>
+      <li><button class="cat-red" data-cat="cat-blue" id="expos">Expos</button></li>
+      <li><button class="cat-red" data-cat="cat-green" id="concerts">Concerts</button></li>
+      <li><button class="cat-red" data-cat="cat-green" id="performing-arts">Performing Arts</button></li>
+      <li><button class="cat-red" data-cat="cat-green" id="sports">Sports</button></li>
+      <li><button class="cat-red" data-cat="cat-green" id="festival">Festival</button></li>
+      <li><button class="cat-red" data-cat="cat-green" id="community">Community</button></li>
+    </ul>
+  </div>
+
+<!-- CONTENT -->
+  <div class="container mt-2">
+    <div class="row">
+    </div>
+  </div>
+
+<!-- MODAL -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+        
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="./scripts/main.js"></script>
 </body>
 
 </html>
