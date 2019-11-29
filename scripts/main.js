@@ -76,11 +76,10 @@ $(document).ready(function () {
       e.preventDefault();
       let value = $('#search-bar').val();
       $.ajax({
-        url:`http://localhost:5000/events/search/${value}`,
+        url:`http://localhost:3000/events/search/${value}`,
         type:"get"
       })
       .done(data => {
-        console.log(data)
         viewAll(data)
       })
       // .fail((data) => {
@@ -93,7 +92,7 @@ $(document).ready(function () {
 
 function showAll() {
   $.ajax({
-    url:"http://localhost:5000/events",
+    url:`http://localhost:3000/events/?lon=${localStorage.lon}&lat=${localStorage.lat}`,
     type:"get"
   })
   .done(data => {
@@ -198,7 +197,7 @@ function sendUserToken(token) {
 
 function showOne(id) {
   $.ajax({
-    url:`http://localhost:5000/events/${id}`,
+    url:`http://localhost:3000/events/${id}`,
     type:"get"
   })
   .done(result => {
@@ -250,7 +249,6 @@ function viewAll(result) {
 
 $('.post').show();
   $(".filtering button").on("click", function(){
-    // console.log(this)
     if (!$(".filtering button").hasClass("active")) {
       $(".filtering button").addClass("active")
     }

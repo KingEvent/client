@@ -106,7 +106,7 @@ body {
     padding: 60px;
   }
 }
-.range-slider {
+/* .range-slider {
   margin: 60px 0 0 0%;
 }
 .range-slider {
@@ -184,7 +184,7 @@ body {
 }
 input::-moz-focus-inner, input::-moz-focus-outer {
   border: 0;
-}
+} */
 
 
 
@@ -237,12 +237,6 @@ input::-moz-focus-inner, input::-moz-focus-outer {
   }
   .cat-red {
     background: #ff4136;
-  }
-  .cat-green {
-    background: #2ecc40;
-  }
-  .cat-blue {
-    background: #0074d9;
   }
   .row .col {
     opacity: 0;
