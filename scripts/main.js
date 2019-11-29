@@ -89,16 +89,17 @@ function onSignIn(googleUser) {
             id_token: id_token
         }
     })
-        .done(userCredentials => {
-            /* Get user token from server then save to localStorage.accessToken */
-            console.log(userCredentials)
-            $('#loginModal').modal('hide')
-            $('#sign-in').hide()
-        })
-        .fail(err => {
-            console.log(err)
-        })
-        .always()
+    .done(userCredentials=> {
+        localStorage.setItem('accessToken', userCredentials)
+        /* Get user token from server then save to localStorage.accessToken */
+        $('#logout').show()
+        $('#loginModal').modal('hide')
+        $('#sign-in').hide()
+    })
+    .fail(err=> {
+        console.log(err)
+    })
+    .always()
 }
 
 function onSignIn(googleUser) {
@@ -142,8 +143,10 @@ function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
         console.log('User signed out.');
+        $('#logout').hide()
+        $('#sign-in').show()
+        localStorage.removeItem('accessToken')
     });
-    $('#sign-in').show()
 }
 
 function loginFunction(e) {
