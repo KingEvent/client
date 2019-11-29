@@ -115,7 +115,6 @@ function onSignIn(googleUser) {
         .done(userCredentials=> {
             localStorage.setItem('token', userCredentials)
             console.log(userCredentials)
-            $('#loginModal').modal('hide')
             $('#sign-in').hide()
         });
 }
@@ -146,7 +145,7 @@ function signOut() {
         console.log('User signed out.');
         $('#logout').hide()
         $('#sign-in').show()
-        localStorage.removeItem('accessToken')
+        localStorage.removeItem('token')
     });
 }
 
