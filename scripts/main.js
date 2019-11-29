@@ -102,6 +102,21 @@ function onSignIn(googleUser) {
     .always()
 }
 
+function onSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
+    $.ajax({
+        method: 'post',
+        url: 'http://localhost:3000/google-signin',
+        data: {
+            id_token: id_token
+        }
+    })
+        .done(userCredentials => {
+            console.log(userCredentials)
+            $('#loginModal').modal('hide')
+            $('#sign-in').hide()
+        });
+}
 
 // get user ip using ip-api.com and saved to localStorage
 function getUserIP() {
