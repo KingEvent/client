@@ -146,7 +146,7 @@ function onSignIn(googleUser) {
 function getUserIP() {
     $.ajax({
         method: 'get',
-        url: 'http://ip-api.com/json'
+        url: 'http://localhost:3000/user-ip'
     })
         .done(ipData => {
             let { regionName, city, lat, lon, country } = ipData;
