@@ -116,7 +116,6 @@ function onSignIn(googleUser) {
         .done(userCredentials=> {
             localStorage.setItem('token', userCredentials)
             console.log(userCredentials)
-            $('#loginModal').modal('hide')
             $('#sign-in').hide()
         });
 }
