@@ -88,3 +88,20 @@ function signOut() {
 function loginFunction(e) {
     const data = $('input').serialize()
 }
+
+function sendUserToken(token) {
+    $.ajax({
+        type: 'POST',
+        url: `${BASE_URL}/calendar`,
+        data: { token },
+        headers: {
+            authorization: localStorage.getItem('jwt_token')
+        }
+    })   
+    .done(data => {
+        console.log(data)
+    }) 
+    .fail(err => {
+        console.log(err)
+    })
+}
