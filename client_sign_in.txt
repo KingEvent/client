@@ -1,0 +1,5 @@
+ Client ID
+613491016366-lgkv9s5iri5t74ad7fmrtdgsnimljmms.apps.googleusercontent.com
+
+ Client Secret
+LsT5fA2ea0ebcgXAANVF5G5F 
