@@ -19,22 +19,26 @@ $( document ).ready(function() {
     });
 });
 
-function sendUserToken(token) {
+function onSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
     $.ajax({
-        type: 'POST',
-        url: `${BASE_URL}/calendar`,
-        data: { token },
-        headers: {
-            authorization: localStorage.getItem('jwt_token')
+        method: 'post',
+        url: 'http://localhost:3000/google-signin',
+        data: {
+            id_token: id_token
         }
-    })   
-    .done(data => {
-        console.log(data)
-    }) 
-    .fail(err => {
+    })
+    .done(userCredentials=> {
+        /* Get user token from server then save to localStorage.accessToken */
+        console.log(userCredentials)
+        $('#loginModal').modal('hide')
+        $('#sign-in').hide()
+    })
+    .fail(err=> {
         console.log(err)
     })
-});
+    .always()
+}
 
 function onSignIn(googleUser) {
     var id_token = googleUser.getAuthResponse().id_token;
@@ -45,11 +49,12 @@ function onSignIn(googleUser) {
             id_token: id_token
         }
     })
-        .done(userCredentials=> {
-            console.log(userCredentials)
-            $('#loginModal').modal('hide')
-            $('#sign-in').hide()
-});
+    .done(userCredentials=> {
+        console.log(userCredentials)
+        $('#loginModal').modal('hide')
+        $('#sign-in').hide()
+    });
+}
 
 // get user ip using ip-api.com and saved to localStorage
 function getUserIP() {
@@ -80,6 +85,6 @@ function signOut() {
     $('#sign-in').show()
 }
 
-function loginFunction(e){
+function loginFunction(e) {
     const data = $('input').serialize()
 }
