@@ -18,7 +18,6 @@ $(document).ready(function () {
         }
     });
 
-
     //register and login
     // getRegister()
     $('#register_form').submit(function (e) {
@@ -43,7 +42,6 @@ $(document).ready(function () {
                 Swal.fire(data.responseJSON.message)
             })
     });
-
 
     // getLogin()
     $('#login_form').submit(function (e) {
@@ -163,7 +161,6 @@ function getUserIP() {
         })
         .always()
 }
-
 
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
